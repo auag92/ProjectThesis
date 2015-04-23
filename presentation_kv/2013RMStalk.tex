@@ -1,0 +1,802 @@
+% $Header: /cvsroot/latex-beamer/latex-beamer/solutions/generic-talks/generic-ornate-15min-45min.en.tex,v 1.4 2004/10/07 20:53:08 tantau Exp $
+
+\documentclass{beamer}
+
+\mode<presentation>
+{
+  \usetheme{Warsaw}
+
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+
+\usepackage[english]{babel}
+% or whatever
+
+\usepackage[latin1]{inputenc}
+% or whatever
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+
+\title[] % (optional, use only with long paper titles)
+{Quadrature Domains -- A Survey}
+
+%\subtitle
+%{Presentation Subtitle} % (optional)
+
+\author[]% (optional, use only with lots of authors)
+{Apaar Shanker \\ \texttt{} }
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[University of Alexandria] % (optional, but mostly needed)
+{
+ %\inst{1}%
+  Indian Institute of Science
+}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\subject{Talks}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>
+%    \frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+
+  \begin{itemize}
+
+  \item {An exercise in Linear Algebra}
+
+  \item {Quadrature Domains}
+
+     \begin{itemize}
+        \item {A definition and some remarks}
+   
+        \item {An example and some questions}
+
+        \item {Relevance of the Cauchy transform}
+
+     \end{itemize}
+
+  \item {Properties of quadrature domains}
+
+  \item {Constructing quadrature domains}
+
+  \item {Examples}
+
+  \item {What happens in higher dimensions?}
+
+  \end{itemize}
+
+  % \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+%\subsection[Short First Subsection Name]{First Subsection Name}
+
+\begin{frame}
+  \frametitle{An Exercise in Linear Algebra}
+  % \framesubtitle{Subtitles are optional.}
+  % - A title should summarize the slide in an understandable fashion
+  %   for anyone how does not follow everything on the slide itself.
+
+Let $V_n$ be the vector space of all real polynomials on $[a, b]$ with degree at most $n$. 
+Choose distinct points $t_0, t_1, \ldots, t_n$ in $[a, b]$ and consider the following functionals
+on $V_n$:
+\[
+L_i(p) = p(t_i), \; 0 \le i \le n.
+\]
+
+  \begin{itemize}
+  \item Suppose that
+\[
+\alpha_0 L_0 + \alpha_1 L_1 + \ldots + \alpha_n L_n = 0.
+\]
+  \item Evaluate this linear combination on the basis elements $\{1, x, x^2, \ldots, x^n\}$ to get 
+\[
+\alpha_0 + \alpha_1 t_j + \ldots + \alpha_n t_j^n = 0
+\]  
+for all $1 \le j \le n$.
+
+%Use \texttt{itemize} a lot.
+
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{The Exercise Contd.}
+
+ %You can create overlays\dots
+  
+\begin{itemize}
+  \item These are $n + 1$ equations in the $n + 1$ unknowns $\alpha_0, \alpha_1, \ldots, \alpha_n$.
+    
+  \item Since the $t_i$'s were distinct, the only solutions are $\alpha_j = 0$ for all $ 1\le j \le n$.
+
+  \item Hence there are constants $c_0, c_1, \ldots, c_n$ such that 
+\[
+\int_a^b p(x) \; dx = c_0 p(t_0) + c_1 p(t_1) + \ldots + c_n p(t_n)
+\]
+for all $p \in V_n$.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{itemize}
+
+  \item Example: For all $p \in V_3$,
+\[
+\int_{-1}^1 f(t) \; dt = 1/3 f(-1) + 4/3 f(0) + 1/3 f(1)
+\]
+which is a `Quadrature Identity'. 
+
+\medskip
+
+  \item This motivates the following $\ldots$
+ 
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Quadrature Domains}
+
+\begin{frame}
+  \frametitle{A Definition and Remarks}
+
+\begin{itemize}
+
+ \item For a domain $D \subset \mathbb C$, let $L^1_{\mathcal O}(D) = L^1(D) \cap {\mathcal O}(D)$.
+
+\medskip
+
+ \item $D$ is a {\it quadrature domain} for $L^1_{\mathcal O}(D)$ if there exist points $z_1, z_2, \ldots, z_m \in D$ and scalars $a_{j, k} \in \mathbb C$ such that
+\[
+\int_D f(z) \; d  \sigma_z = \sum_{j = 1}^m \sum_{k = 0}^{r_j - 1} a_{j, k} f^{(k)}(z_j) 
+\]
+for every $f \in L^1_{\mathcal O}(D)$.
+
+\medskip
+
+ \item Quadrature data = The points $z_j$ (called the {\it nodes}) and the constants $a_{j, k}, r_j$.
+
+% \item Can use other test classes too -- harmonic functions, subharmonic functions.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{An Example and Some Questions}
+
+\begin{itemize}
+
+  \item An Example: Take $D = B(a, r) \subset \mathbb C$. Then for all such $f$,
+\[
+\int_D f(z) \; d \sigma_z = \pi r^2 f(a).
+\]
+
+ \item Are there other examples of domains that admit such quadrature identities? How many are there?
+
+\medskip
+
+ \item What are the analytic properties of such domains?
+
+\medskip
+
+ \item If there are many such examples, is there a procedure to construct them given the quadrature data?
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Relevance of the Cauchy transform}
+
+\begin{itemize}
+ 
+ \item Think of the quadrature identity as: The integral of $f$ on $D$ is a finite linear sum of Dirac masses and their derivatives at the nodes $z_j$.
+ 
+ \item Take a quadrature domain $D \subset \mathbb C$. Pick $\zeta \in {\mathbb C} \setminus D$ and use 
+\[
+f(z) = 1/(z - \zeta)
+\]
+in the quadrature identity.
+
+ \item Then
+\[
+\int_D \frac{d \sigma_z}{z - \zeta} = R(\zeta)
+\]
+where $R(\zeta)$ is rational.
+
+ \item The left side is exactly the Cauchy transform of $\chi_D$, the characteristic function of $D$!
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Properties of Quadrature Domains}
+
+\begin{frame}
+
+Need to understand the Cauchy transform of $\chi_D$ $\ldots$
+
+\begin{lemma}
+Let $D \subset \mathbb C$ be such that
+\[
+\int_{D} \frac{d \sigma_z}{\vert z \vert} < \infty.
+\]
+Define
+\[
+S(\zeta) = \int_D \frac{d \sigma_z}{z - \zeta}.
+\]
+Then $S(\zeta)$ is continuous on $\mathbb C$, is $O(\vert \zeta \vert^{1/2})$ as $\zeta \rightarrow \infty$ and for $\zeta \in D$ satisfies
+\[
+S(\zeta) = - \pi \overline \zeta + g(\zeta)
+\]
+where $g$ is continuous on $\overline D$ and holomorphic on $D$.
+\end{lemma}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Proof}
+
+ \begin{itemize}
+
+ \item $S(\zeta) = \chi_D \ast 1/z$ and hence $S$ is continuous on $\mathbb C$.
+
+ \item Take a test function $\phi$ and compute
+
+\begin{align*}
+\frac{\partial S}{\partial \overline \zeta} (\phi) &= - \int_{\mathbb C} \bigg( \frac{\partial \phi}{\partial \overline \zeta} \int_{\mathbb C} \frac{\chi_D(z)}{z - \zeta} \; d \sigma_z 
+                                                                           \bigg) d \sigma_{\zeta}\\
+                                                   &= - \int_{\mathbb C} \chi_D(z) \bigg( \int_{\mathbb C} \frac{1}{z - \zeta} \frac{\partial \phi}{\partial \overline \zeta} \; d 
+                                                                            \sigma_{\zeta} \bigg) d \sigma_z.
+\end{align*}
+
+ \item The inner integral $ = \pi \phi(z)$ and hence $\frac{\partial S}{\partial \overline \zeta} = - \pi \chi_D(\zeta)$ as a distribution.
+
+ \item $S(\zeta)$ is holomorphic for $\zeta \in \mathbb C \setminus D$ and in $D$, the function $g = S + \pi \overline \zeta$ satisfies 
+${\partial g}/{\partial \overline \zeta} = 0.$
+
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Proof Contd.}
+
+ \begin{itemize}
+
+ \item Let $D_1 = \{z : \vert z - \zeta \vert \le \vert \zeta \vert^{1/2}\}$ and $D_2 = \mathbb C \setminus D_1$.
+
+\medskip
+
+ \item Then
+\[
+\vert S(\zeta) \vert \le \int_{D_1} \frac{\vert \chi_D(z) \vert}{\vert z - \zeta \vert} \; d\sigma_z + \int_{D_2} \ast.
+\]
+ 
+\medskip
+
+ \item The first integral is at most 
+\[
+\int_{\vert w \vert \le \vert \zeta \vert^{1/2}} \frac{d \sigma_w}{\vert w \vert} \lesssim \vert \zeta \vert^{1/2},
+\]
+
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+ \begin{itemize}
+
+ \item while the second one can be written as
+\[
+\int_{D_2} \ast \le \int_{\mathbb C}  \frac{\vert z \vert}{\vert z -\zeta \vert} \cdot \frac{\vert \chi_D(z) \vert}{\vert z\vert} \; d \sigma_z
+\]
+where the term
+\[
+\frac{\vert z \vert}{\vert z -\zeta \vert} \le 1 + \frac{\vert \zeta \vert}{\vert z -\zeta \vert} \le 1 +  \vert \zeta \vert^{1/2}. 
+\]
+ 
+ \item Hence $S(\zeta) = O(\vert \zeta \vert^{1/2})$ for large $\zeta$.
+
+
+ \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{The Aharonov--Shapiro Theorem}
+
+The following are equivalent:
+
+\begin{enumerate}
+
+\item[(i)] $D$ is a quadrature domain.
+
+\item[(ii)] There is a distribution $\alpha$ supported at finitely many points in $D$ (the nodes!) and which is a finite linear combination of Dirac masses and their derivatives at 
+these points, such that
+
+\[
+\int _D f = \langle \alpha, f \rangle.
+\]
+
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{enumerate}
+
+\item[(iii)] There is a rational function $R(\zeta)$ with all poles in $D$ such that $S(\zeta) = R(\zeta)$ for $\zeta \in \mathbb C \setminus D$.
+
+\item[(iv)] There exists a meromorphic function in $D$, say $h$ with finitely many poles in $D$ such that $h$ is continuous on $\overline D$ and 
+\[
+h(z) = \overline z
+\]
+for  $z \in \partial D$.
+
+\end{enumerate}
+
+\medskip
+
+{\it Remark:} Connection with the Schwarz reflection principle and the `analytic' Dirichlet problem.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Pointers to the Proof:}
+\begin{itemize}
+
+\item Suppose (ii) holds. Take $f(z) = 1/(z - \zeta)$ for $\zeta \in \mathbb C \setminus D$. Then
+\[
+S(\zeta) = \int_D \frac{d \sigma_z}{z - \zeta} = \langle \alpha, 1/(z - \zeta) \rangle
+\]
+which is a rational function, say $R(\zeta)$ with poles exactly at the nodes. Thus (iii) holds.
+
+\item Conversely, if (iii) holds, then
+\[
+S(\zeta) = \int_D \frac{d \sigma_z}{z - \zeta} = R(\zeta) = p(\zeta)/q(\zeta).
+\]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+Since $S(\zeta) = O(\vert \zeta \vert^{1/2})$, $\deg p \le \deg q$, i.e., the partial fraction decomposition of $R$ does not have a holomorphic 
+part. Thus, 
+\[
+R(\zeta) = \langle \alpha, 1/(z - \zeta) \rangle
+\]
+for an appropriate $\alpha$. The support of $\alpha$ is exactly the set of poles of $R(\zeta)$. Thus the quadrature identity holds for functions of the form $1/(z - \zeta)$, $\zeta \in 
+\mathbb C \setminus D$. By Ahlfors--Bers, such functions are dense in our test class and hence (ii) holds.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Why are (iii) and (iv) equivalent?}
+
+Suppose (iii) holds, i.e., $S(\zeta) = R(\zeta)$ on $\mathbb C \setminus D$. Let
+\[
+h(\zeta) = \pi^{-1}(g(\zeta) - R(\zeta)). 
+\]
+
+\begin{itemize}
+
+\item Then $h$ is meromorphic on $D$ and has finitely many poles in $D$.
+
+\item $h$ extends continuously to $\partial D$ since $g$ does and on $\partial D$,
+\[
+h(\zeta) = \pi^{-1}(S(\zeta) + \pi \overline \zeta - R(\zeta)) = \overline \zeta.
+\]
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Boundaries of Quadrature Domains}
+
+\begin{theorem}
+Let $D$ be a quadrature domain. Then there exists a nonconstant polynomial $P \in \mathbb R[X, Y]$, irreducible over $\mathbb C$ such that
+\[
+\partial D \subset \{z = x + iy : P(x, y) = 0\}.
+\]
+\end{theorem}
+
+Assuming this --
+
+\begin{itemize}
+ 
+ \item Let
+\[
+F(z) =
+\begin{cases}
+  S(z), &\text{if $z \in \mathbb C \setminus D$;}\\
+  g(z) - \pi h(z), &\text{if $z \in D$}.
+\end{cases}
+\]
+
+ \item $F$ is meromorphic away from $\partial D$, continuous on $\mathbb C$ and is $O(\vert \zeta \vert^{1/2})$ far away. Hence it is rational!
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Proof of the Theorem}
+
+\begin{lemma}
+Let $D \subset \mathbb C$ be bounded. Suppose $f, g \in \mathcal M(D)$ with only finitely many poles. Suppose further that both extend continuously to $\partial D$ and take real values 
+there. Then there is a polynomial $P \in \mathbb R[X, Y]$, irreducible over $\mathbb C$ such that $P(f(z), g(z)) = 0$ on $D$.
+\end{lemma}
+
+\begin{itemize}
+ \item $m = $ the no. of poles of $f, g$ with multiplicity and $\mathcal P = $ the set of poles of $f, g$.
+
+ \item For $n \ge 1$, consider $\{ f^j g^k : j, k \ge 0, 1 \le j +k \le n\}$.
+
+ \item Exactly $n(n + 3)/2$ such functions with poles in $\mathcal P$ and the total multiplicity is at most $mn$.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{itemize}
+ \item The vector space generated by the principal parts of $f^j g^k$ has real dimension $\le 2mn$.
+
+\medskip
+
+ \item Choose $n$ so that $n(n + 3)/2 > 2mn$!
+
+\medskip
+
+ \item Then there is $Q \in \mathbb R[X, Y]$ such that $Q(f, g) \in \mathcal O (D)$ and is real on $\partial D$. Then $Q(f, g) \equiv 0$ on $D$.
+
+\medskip
+
+ \item Choose such a $P$ with least degree $d$. Suppose that $P = P_1 P_2$ where $P_1, P_2 \in \mathbb C[X, Y]$ and have degrees $< d$.
+
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+ \begin{itemize}
+
+ \item Both $P_1(f, g), P_2(f, g)$ are meromorphic on $D$ and $P(f, g) = 0$ on $D$. Hence, say $P_1(f, g) \equiv 0$ on $D$.
+
+\medskip
+
+ \item Write $P_1 = P_3 + i P_4$ and note that 
+\[
+P_3(f, g) + i P_4(f, g) = 0
+\]
+on $\partial D$. Since $f, g$ are real on $\partial D$, it follows that $P_3(f, g), P_4(f, g) \equiv 0$ on $D$. 
+
+\medskip
+
+ \item But $\deg P_3, \deg P_4 < d$!
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{itemize}
+
+ \item Take $h$ meromorphic on $D$ with finitely many poles and $h(z) = \overline z$ on $\partial D$.
+
+\medskip
+
+ \item Let $f(z) = (z + h(z))/2$ and $g(z) = (z - h(z))/2$. Note that $f(z) = x, g(z) = y$ on $\partial D$.
+
+\medskip
+
+ \item There is a $P \in \mathbb R[X, Y]$ such that $P(f, g) = P(x, y) = 0$ on $\partial D$.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+ \frametitle{Remarks}
+ 
+\begin{itemize}
+  
+ \item The region bounded by a triangle is not a quadrature domain.
+
+ \item An annulus is not a quadrature domain.
+
+ \item The region bounded by an ellipse is also not a quadrature domain. Use: If
+\[
+P = P_n + P_{n-1} + \ldots + P_0
+\]
+ is the decomposition into homogeneous terms, then $P_n$ is divisible by $x^2 + y^2$.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{A characterization of the disc: Epstein--Schiffer}
+
+Suppose that $0 \in D$, that $D$ is bounded and 
+\[
+\int_D f d \sigma_z = a f(0)
+\]
+for all $f$ in our test class. Then $h$ has a simple pole at $z = 0$ and $h(z) = \overline z$ on $\partial D$. So $z h(z) = z \overline z =$ constant on $\partial D$. This means that 
+$D$ is a disc.
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Constructing Quadrature Domains}
+
+\begin{frame}
+ \frametitle{Constructing Quadrature Domains}
+
+\begin{theorem}
+
+A bounded simply connected domain $D \subset \mathbb C$ is a quadrature domain if and only if its Riemann map 
+\[
+\phi : \Delta \rightarrow D
+\]
+is rational with all poles outside $\overline \Delta$. In fact, if $z_i$'s are the nodes in $D$ and $t_i = \phi^{-1}(z_i)$, then the poles of $\phi$ are exactly at $1/\overline t_i$.
+
+\end{theorem}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Proof}
+
+\begin{itemize}
+ 
+ \item $\phi$ extends continuously up to $\partial \Delta$.
+
+ \item Then $h(\phi(t)) = \overline{\phi(t)}$ for $\vert t \vert = 1$. 
+
+ \item Define 
+\[
+R(t) =
+ \begin{cases}
+  \overline{\phi(1/\overline{t})}, &\text{if $\vert t \vert > 1$;}\\ 
+  h(\phi(t)),                      &\text{if $\vert t \vert \le 1$.}     
+ \end{cases}
+\]
+
+ \item $R$ is rational. So is $\phi(t) = \overline{R(1/\overline{t})}$. 
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Examples}
+
+\begin{frame}
+ \frametitle{Illustrating this technique}
+
+\begin{itemize}
+
+\item Recall that $\psi(z) = (z + 1/z)/2$ conformally maps $\mathbb C \setminus \overline \Delta$ onto $\mathbb C \setminus [-1, 1]$.
+
+\item For $R > 1$, the circle $C_R$ is mapped onto an ellipse $E_R$ where
+\[
+x = \frac{1}{2}\bigg(R + \frac{1}{R} \bigg) \cos \theta, y = \frac{1}{2} \bigg( R - \frac{1}{R} \bigg) \sin \theta.
+\]
+
+\item Thus $\psi(Rz)$ maps $\mathbb C \setminus \overline \Delta$ onto $\mathbb C \setminus \overline E_R$.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{itemize}
+
+ \item Thus $z \mapsto 1/\overline{\psi (R/ \overline z)}$ is a conformal map from $\Delta$ onto the region bounded by inverting $E_R$ under the map $z \mapsto 1/\overline z$. 
+
+ \item The boundary of this region, say $N_R$ is given by
+\[
+(x^2 + y^2)^2 - a^{-2} x^2 - b^{-2}y^2 = 0
+\]
+ where $a =  (R + 1/R)/2$ and $b = (R - 1/R)/2$.
+
+ \item The conformal map on the disc is $\phi(z) = 2Rz/(R^2 + z^2)$ which has poles at $z = \pm i R$.
+
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+\begin{itemize}
+
+ \item Invert the poles to get $\pm i/R$ and note that $\phi(\pm i/R) = \pm 2i/(R^2 - R^{-2})$. These are the nodes in $N_R$!
+
+ \item To get the quadrature identity, take $f$ holomorphic in a neighbourhood of $\overline N_R$ and note
+\begin{align*}
+\int_{N_R} f \; d \sigma_z &= (1/2i) \int_{\partial N_R} f(z) \overline z \;dz\\
+                         &= (1/2i) \int_{\partial N_R} f(z) h(z) \;dz\\ 
+                         &= 2\pi (a_1 f(z_1) + a_2f(z_2))  
+\end{align*}
+where $a_1, a_2$ are the residues of $h(z)$ at the simple poles $z_1, z_2$ above.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{Ubiquity of quadrature domains: Gustafsson's Theorem}
+
+\begin{theorem}
+Let $D$ be a smoothly bounded domain with finite connectivity. Then there exists a quadrature domain $G$ as close as we want to $D$ in the $C^{\infty}$ topology.
+\end{theorem}
+
+{\it Remark:} An annulus is not a quadrature domain, but there are plenty of such domains nearby!
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{What happens in higher dimensions?}
+
+\begin{frame}
+ \frametitle{The story in higher dimensions}
+\begin{center}
+$\ldots$ is yet to take off.
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+ \frametitle{References}
+
+\begin{itemize}
+
+\item D. Aharonov, H. Shapiro: {\it Domains on which analytic functions satisfy quadrature identities}, J. Anal. Math. ${\bf 30}$, (1976), 39--73.
+
+\item P. J. Davis: {\it The Schwarz function and its applications}, The Carus Math. Monographs, ${\bf 17}$, (1974).
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+\begin{center}
+ Thank You
+\end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+

@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Introduction}{11}{0}{1}
+\beamer@sectionintoc {2}{Quadrature Domains}{18}{0}{2}
+\beamer@sectionintoc {3}{Properties of Quadrature Domains}{29}{0}{3}
+\beamer@sectionintoc {4}{Constructing Quadrature Domains}{69}{0}{4}
+\beamer@sectionintoc {5}{Examples}{74}{0}{5}
+\beamer@sectionintoc {6}{What happens in higher dimensions?}{83}{0}{6}
